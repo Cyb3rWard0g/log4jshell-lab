@@ -33,6 +33,13 @@ docker logs --follow web-server
 
 ### Compile
 
+**Dockerized**
+```
+cd vulnApp
+docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
+```
+
+**Locally**
 ```
 cd vulnApp
 mvn -f pom.xml clean package -DskipTests
