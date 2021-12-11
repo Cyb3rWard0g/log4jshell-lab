@@ -20,7 +20,7 @@ services:
     build: web-server/
     container_name: web-server
     ports:
-      - 8888:80
+      - :80
     volumes:
       - ./web-server/conf:/etc/nginx/conf.d
     restart: always
@@ -29,6 +29,24 @@ services:
     networks:
       log4j:
         ipv4_address: 192.168.55.20
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.3.2
+    container_name: logstash
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "9"
+        max-size: "6m"
+    volumes:
+      - ./vulnApps/logstash/pipeline:/usr/share/logstash/pipeline
+    environment:
+      - xpack.monitoring.enabled=false
+      - ls.java.opts="-Xmx256m -Xms256m"
+    ports:
+      -  "8080:8080"
+    restart: always
+    networks:
+      log4j:
 
 networks:
   log4j:
