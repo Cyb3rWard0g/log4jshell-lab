@@ -1,11 +1,11 @@
-# log4j-lab
+# CVE-2021-44228 Log4j Remote Code Execution (Log4Shell) Research Lab
 
 ## Docker Deployment
 
 ### Clone Repo
 
 ```
-git clone X
+git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 ```
 ### Create Local Socket Proxy
 
