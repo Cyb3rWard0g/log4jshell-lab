@@ -1,4 +1,4 @@
-# CVE-2021-44228 Log3Shell Research Lab 🚧
+# CVE-2021-44228 Log4Shell Research Lab 🚧
 
 A basic lab environment to test some of the public proof of concepts to trigger and learn more about [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) and expedite the time it takes to deploy multiple scenarios.
 
