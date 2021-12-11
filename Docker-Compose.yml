@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+  ldap-server:
+    build: ldap-server/
+    container_name: ldap-server
+    ports:
+      - 1389:1389
+    entrypoint:
+      - java
+      - -cp
+      - /usr/app/marshalsec-0.0.3-SNAPSHOT-all.jar
+      - marshalsec.jndi.LDAPRefServer
+      - http://192.168.55.20:8888/#CreateFile
+    restart: always
+    networks:
+      log4j:
+        ipv4_address: 192.168.55.10
+  web-server:
+    image: web-server/
+    container_name: web-server
+    ports:
+      - 8888:80
+    volumes:
+      - ./web-server/conf:/etc/nginx/conf.d
+    restart: always
+    depends_on:
+      - ldap-server
+    networks:
+      log4j:
+        ipv4_address: 192.168.55.20
+
+networks:
+  log4j:
+    external:
+      name: socket_proxy
