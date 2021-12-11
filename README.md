@@ -1,4 +1,4 @@
-# CVE-2021-44228 Log4j Remote Code Execution (Log4Shell) Research Lab
+# CVE-2021-44228 Log4j RCE (Log4Shell) Research Lab
 
 ## Docker Deployment
 
