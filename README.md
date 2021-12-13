@@ -12,6 +12,7 @@ git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 ### Run Docker Compose File
 
 ```
+cd log4jshell-lab
 docker-compose -f docker-compose.yml up --build -d
 ```
 
@@ -33,13 +34,13 @@ docker logs --follow web-server
 
 **Dockerized**
 ```
-cd vulnApp
+cd vulnApps
 docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
 ```
 
 **Locally**
 ```
-cd vulnApp
+cd vulnApps
 mvn -f pom.xml clean package -DskipTests
 ```
 
