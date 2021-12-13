@@ -27,7 +27,14 @@ docker logs --follow web-server
 
 ## Run Vulnerable Apps
 
+* [Serve Netcat Server](#netcat-server)
 * [BasicJar](#basicjar)
+
+## Netcat Server
+
+```
+nc -lvnp 443
+```
 
 ## BasicJar
 ### Compile
