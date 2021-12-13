@@ -57,7 +57,7 @@ mvn -f pom.xml clean package -DskipTests
 java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar  com.log4jshell.App
 ```
 
-![](resources/images/log4jshell-trigger-rce-basicjar-reverseshell.png)
+![](resources/images/log4jshell-trigger-rce-basicjar-reverseshell2.png)
 
 ## References
 * https://www.smarthomebeginner.com/traefik-docker-security-best-practices/#9_Use_a_Docker_Socket_Proxy
