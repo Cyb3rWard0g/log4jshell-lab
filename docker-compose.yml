@@ -16,7 +16,10 @@ services:
     networks:
       log4j:
   web-server:
-    build: attacker-server/web-server/
+    build:
+      context: attacker-server/web-server/
+      args:
+        PAYLOAD_IP: 127.0.0.1
     container_name: web-server
     ports:
       - 8888:8888
