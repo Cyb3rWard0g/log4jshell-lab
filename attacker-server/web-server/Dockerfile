@@ -7,4 +7,4 @@ RUN for f in *.java ; do javac "$f" ; done
 FROM nginx
 COPY --from=builder /payloads/*.class /tmp/
 
-EXPOSE 80
+EXPOSE 8888
