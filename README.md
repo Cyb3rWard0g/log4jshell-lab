@@ -1,6 +1,6 @@
 # CVE-2021-44228 Log4Shell Research Lab 🚧
 
-A basic lab environment to test some of the public proof of concepts to trigger and learn more about [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
+A basic research lab to learn more about [Log4Shell - CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
 
 ## Used By
 
@@ -11,6 +11,7 @@ A basic lab environment to test some of the public proof of concepts to trigger 
 ### Clone Repo
 
 ```
+sudo su
 git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 ```
 ### Run Docker Compose File
@@ -61,7 +62,7 @@ java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:
 
 ![](resources/images/log4jshell-trigger-rce-basicjar-reverseshell3.png)
 
-## Seurity Datasets
+## Security Datasets
 
 * [Basic JNDI Lookup PCAP](https://securitydatasets.com/notebooks/atomic/linux/initial_access/SDLIN-211214154100.html)
 

