@@ -1,6 +1,9 @@
-# CVE-2021-44228 Log4Shell Research Lab 🚧
+# Log4j RCE Research Lab 🚧
 
-A basic research lab to learn more about [Log4Shell - CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
+A basic research lab to learn more about `Log4Shell`:
+* [CVE-2021-45105] https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45105
+* [CVE-2021-45046](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45046)
+* [CVE-2021-44228](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44228).
 
 ## Used By
 
@@ -18,7 +21,7 @@ git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 
 ```
 cd log4jshell-lab
-docker-compose -f docker-compose.yml up --build -d
+docker-compose -f MarshalsecLDAP-NginxWebServer.yml up --build -d
 ```
 
 ### Check Docker Containers

