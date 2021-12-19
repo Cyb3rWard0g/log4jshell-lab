@@ -1,9 +1,9 @@
 # Log4j RCE Research Lab 🚧
 
 A basic research lab to learn more about `Log4Shell`:
-* [CVE-2021-45105](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45105
+* [CVE-2021-45105](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45105)
 * [CVE-2021-45046](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45046)
-* [CVE-2021-44228](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44228).
+* [CVE-2021-44228](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44228)
 
 ## Used By
 
