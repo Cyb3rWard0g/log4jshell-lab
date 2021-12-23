@@ -5,6 +5,9 @@ A basic research lab to learn more about `Log4Shell`:
 * [CVE-2021-45046](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45046)
 * [CVE-2021-44228](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44228)
 
+## Research notes
+
+I took the [following notes](research-notes/README.md) while learning about `Log4Shell`. I hopre they are helpful! 🍻
 ## Used By
 
 * [Microsoft Sentinel To-Go! CVE-2021-44228-Log4Shell Demo](https://github.com/OTRF/Microsoft-Sentinel2Go/tree/master/grocery-list/Linux/demos/CVE-2021-44228-Log4Shell)
