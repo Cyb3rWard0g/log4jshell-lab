@@ -1,13 +1,13 @@
 # Remote Code Execution (RCE) in Apache Log4j2 - Log4Shell
 
-I wanted to learn more about the recent Log4j vulnerabilities, and even got asked to replicate some of the initial variations shared publicly. Creating a proof-of-concept was not as easy as I thought, because I was not as familiar with Log4j. I wanted to get a better understanding of the implementation of JNDI lookups in Log4j. However, I did not even know what Log4j was 😂. Therefore, I started to read Log4j documentation from [https://logging.apache.org/log4j/2.x/index.html](https://logging.apache.org/log4j/2.x/index.html) and took several notes over a couple of days.
+I wanted to learn more about the recent Log4j vulnerabilities, and even got asked to replicate some of the initial variations shared publicly. Creating a proof-of-concept was not as easy as I thought, because I was not as familiar with Log4j. I wanted to get a better understanding of the implementation of JNDI lookups in Log4j. However, I did not even know what Log4j was 😂. Therefore, I started to read [Log4j documentation](https://logging.apache.org/log4j/2.x/index.html) and took several notes over a couple of days.
 
 The following sections highlight initial docs that helped me a lot to get more familiarized with the technology and concepts behind `Log4Shell`. I am cleaning my research notes and sharing them here so that others can benefit if possible.
 
 ## Research Notes
 
 * Understanding the Implementation of Technology
-  * [2021-12-10_01 Log4j Overview](2021-12-10_01-log4j-overview.md)
+  * [2021-12-10_01 Log4j and Lookups Overview](2021-12-10_01-log4j-and-lookups.md)
 
 ## Affected Versions:
 | Date | CVE | Versions |
