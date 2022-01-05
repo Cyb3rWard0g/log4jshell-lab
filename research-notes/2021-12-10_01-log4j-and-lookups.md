@@ -155,6 +155,7 @@ This is because the `${java:os}` represents a [Java Lookup](https://logging.apac
 * On `2016-10-02`, [Log4j 2.7](https://logging.apache.org/log4j/2.x/changes-report.html#a2.7) added the ability to disable message lookups. The following sring `%msg{nolookup}` needed to be added to the layout message format pattern in the Log4j configuration. **Message lookups were still enabled by default**.
 * On `2017-11-18`, [Log4j 2.10](https://logging.apache.org/log4j/2.x/changes-report.html#a2.10.0) added the property `log4j.formatMsgNoLookups` to disable message pattern converter lookups globally. **Message lookups were still enabled by default**.
 * On `2021-12-10`, [Log4j 2.15](https://logging.apache.org/log4j/2.x/changes-report.html#a2.15.0) removed the `log4j2.formatMsgNoLookups` property and `nolookups` message pattern converted option. However, **Message lookups are now disabled by default**. Lookups can be enabled on a per-pattern basis using `%m{lookups}`.
+* On `2021-12-10`, [Log4j 2.16](https://logging.apache.org/log4j/2.x/changes-report.html#a2.16.0) completely removed support for Message Lookups.
 
 ## JNDI Lookups -> Message -> 💣
 

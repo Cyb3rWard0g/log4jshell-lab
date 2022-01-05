@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  rogue-jndi:
+    build: rogue-jndi/
+    container_name: rogue-jndi
+    ports:
+      - 1389:1389
+      - 8888:8888
+    restart: always
+    networks:
+      log4j:
+
+networks:
+  log4j:
+    driver: bridge

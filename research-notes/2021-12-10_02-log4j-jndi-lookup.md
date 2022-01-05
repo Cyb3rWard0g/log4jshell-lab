@@ -110,8 +110,8 @@ ctx.lookup(rmi://untrusted-remote-server:1099/myobject)
 
 ## What Can Be Stored in Those Remote Locations?
 
-* JNDI directory naming services have the ability to store Java objects and share them between applications.
-* Instead of returning a simple string such as "Roberto", a Java object can be returned or referenced from another location.
+* JNDI directory naming services have the ability to store `Java objects` and share them between applications.
+* Instead of returning a simple string such as `Roberto`, a `Java object` can be returned or referenced from another location.
 
 ## Requesting and Referencing Java objects in an LDAP directory (RFC 2713) 
 

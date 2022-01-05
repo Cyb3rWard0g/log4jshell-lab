@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="logdir">${sys:catalina.base}/logs</Property>
+    <Property name="layout">%d{HH:mm:ss} [%t] %-5level %logger{36} - ${ctx:trigger} - %m%n</Property>
+  </Properties>
+  <Appenders>
+    <RollingFile name="VULNAPP-2.15.0" fileName="${logdir}/vulnapp-2.15.0.log" filePattern="${logdir}/vulnapp-2.15.0.%d{yyyy-MM-dd}-%i.log">
+      <PatternLayout pattern="${layout}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="1 MB" />
+      </Policies>
+      <DefaultRolloverStrategy max="10" />
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Root level="error">
+      <AppenderRef ref="VULNAPP-2.15.0"/>
+    </Root>
+  </Loggers>
+</Configuration>
