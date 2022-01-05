@@ -10,6 +10,10 @@ The following sections highlight initial docs that helped me a lot to get more f
   * [Log4j and Lookups Overview](2021-12-10_01-log4j-and-lookups.md)
   * [JNDI Lookups](2021-12-10_02-log4j-jndi-lookup.md)
 
+* Simulations
+  * [CVE-2021-44228](2021-12-11_01-CVE-2021-44228-simulation.md)
+  * [CVE-2021-45046](2022-01-03_01-CVE-2021-45046-simulation.md)
+  
 ## Affected Versions:
 | Date | CVE | Versions |
 | --- | --- | --- |
