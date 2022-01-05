@@ -27,6 +27,7 @@ run the bash script `Install-Tomcat.sh` to install and set up a [Tomcat](https:/
 
 ```Bash
 cd log4jshell-lab/victim/tomcat
+chmod +x Install-Tomcat.sh
 
 sh Install-Tomcat.sh
 ```
