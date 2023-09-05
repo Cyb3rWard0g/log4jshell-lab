@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   ldap-server:
-    build: attacker-server/ldap-server/
+    build: ./ldap-server/
     container_name: ldap-server
     ports:
       - 1389:1389
@@ -17,14 +17,14 @@ services:
       log4j:
   web-server:
     build:
-      context: attacker-server/web-server/
+      context: ./web-server/
       args:
         PAYLOAD_IP: 127.0.0.1
     container_name: web-server
     ports:
       - 8888:8888
     volumes:
-      - ./attacker-server/web-server/conf:/etc/nginx/conf.d
+      - ./web-server/conf:/etc/nginx/conf.d
     restart: always
     depends_on:
       - ldap-server
